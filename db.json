@@ -1,3 +1,40 @@
 {
-    "users": []
+  "users": [
+    {
+      "id": "5f52",
+      "username": "asda",
+      "email": "asdsa",
+      "password": "asd"
+    },
+    {
+      "id": "9dcf",
+      "username": "asda",
+      "email": "asdsa",
+      "password": "asd"
+    },
+    {
+      "id": "8d61",
+      "username": "asda",
+      "email": "asdsa",
+      "password": "asd"
+    },
+    {
+      "id": "1ced",
+      "username": "asda",
+      "email": "asdsa",
+      "password": "asd"
+    },
+    {
+      "id": "3a8d",
+      "username": "asda",
+      "email": "asdsa",
+      "password": "asd"
+    },
+    {
+      "id": "0ce2",
+      "username": "asda",
+      "email": "asdsa",
+      "password": "123"
+    }
+  ]
 }
