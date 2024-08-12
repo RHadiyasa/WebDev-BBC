@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { axiosInstance } from "../lib/axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterPage = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -22,20 +23,49 @@ const RegisterPage = () => {
     }
 
     try {
-      await axiosInstance.post("/users", {
+      // Get user from database
+      const existingUser = await axiosInstance.get("/users", {
+        params: { username },
+      });
+
+      // Check panjang data dari existingUser
+      if (existingUser.data.length > 0) {
+        toast.error("User udah terdaftar");
+        return;
+      }
+
+      const response = await axiosInstance.post("/users", {
         username,
         email,
         password,
       });
+
+      // check response status
+      // === (strict equal) ngebandingin value sama tipe datanya
+      // == equal ngebandingin value
+
+      // if (response.status === 404) {
+      //   toast.error("Gagal register");
+      //   return;
+      // }
+
+      toast.success("Register success!");
     } catch (error) {
-      console.error(error);
+      toast.error(error.message);
+    } finally {
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen font-bold text-3xl">
-      <div className="grid gap-3 w-1/3">
-        <div className="text-center">Register</div>
+    <div className="flex justify-center items-center min-h-screen">
+      <Toaster />
+      {/* Implementasi toaster dari react hot toast */}
+      <div className="grid gap-3 w-1/3 ">
+        <div className="text-center font-bold text-3xl">Register</div>
         <div className="grid gap-5">
           <Divider className="my-2" />
           <Input
@@ -104,10 +134,6 @@ const RegisterPage = () => {
             Register
           </Button>
         </div>
-        <p className="font-normal text-sm">{username}</p>
-        <p className="font-normal text-sm">{email}</p>
-        <p className="font-normal text-sm">{password}</p>
-        <p className="font-normal text-sm">{confirmPassword}</p>
       </div>
     </div>
   );
