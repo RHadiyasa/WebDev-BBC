@@ -14,6 +14,7 @@ const CounterPage = () => {
     setNumber(number - 1);
   };
 
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col gap-5">
