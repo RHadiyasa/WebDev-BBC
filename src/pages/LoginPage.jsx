@@ -18,11 +18,6 @@ const LoginPage = () => {
       console.log(response.data[0]);
 
       const user = response.data[0];
-
-      // if (!user) {
-      //   toast.error("Ga ada kontol");
-      // }
-
       if (user) {
         navigate("/profile-page", { state: { user } }); // useLocation()
       } else {
